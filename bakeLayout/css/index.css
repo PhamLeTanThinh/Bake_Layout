@@ -1,0 +1,899 @@
+/* GLOBAL */
+html,body{
+    font-family: 'Montserrat', sans-serif;
+    /* khai báo font size mặc định cho cả trang web */
+    /* nếu khai báo như bên dưới thì 1 rem = 18px */
+    font-size: 18px;
+    /* nếu không khai báo font size thì 1rem = 16px */
+    /* tự trình duyệt mặc định là 16px */
+}
+
+/* xóa mặc định của trình duyệt */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+header{
+    background-color: #4e2a84;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    /* z index chỉ đi chung với position */
+}
+
+.header__content span{
+    color: #ff0e83;
+}
+
+.header__content a:hover{
+    color: #ff0e83;
+}
+
+.header__content ul{
+    list-style: none;
+}
+
+.header__content ul li{
+    display: inline;
+    font-size: 13px;
+    margin: 0 15px;
+    font-weight: bold;
+    
+}
+
+
+.header__content a{
+    text-decoration: none;
+    color: white;
+    transition: all .5s;
+}
+
+
+.header__content{
+    /* cách canh giữa nội dung của session theo chiều ngang */
+    width: 90%;
+    margin: 0 auto;
+    /* t-b, l-r */
+    padding: 20px 0;
+
+    /* sử dụng kĩ thuật flex thay vì dùng float: left */
+    /* đầu tiên phải xác định thằng con nào lên chung 1 hàng */
+    /* tiếp theo tìm tới cha bên ngoài gần đó, để khai báo */
+    /* chỉnh con nhưng khai báo ở cha */
+    display: flex;
+    /* sử dụng flex thì có những thuộc tính đi chung */
+    /* justify-content: thêm khoảng cách cho các thành phần con của chúng ta, bên trái bên phải */
+    justify-content: space-around; 
+    /* space-around thêm khoảng cách bên trái phải cho thẻ con*/
+    /* space-between:thẻ đầu tiên canh sát lề trái, thẻ cuối cùng canh sát lề phải
+    thẻ giữa chia đều khoảng cách */
+    /* space-evenly: chia đều cho cả 3 */
+    align-items: center;
+    /* align-items: canh giữa thẻ con theo chiều ngang */
+}
+/* thẻ p trong header */
+.header__content p{
+    color: white;
+    font-size: 2.05rem;
+    /* đơn vị rem  */
+}
+
+/* CAROUSEL */
+.carousel{
+    background-image: url(../images/b3.jpg);
+    height: 800px;
+    background-size: cover;
+    background-position: center;
+    /* chỉ áp dụng khi flex có một thẻ con */
+    /*  */
+    display: flex;
+    justify-content: center;
+    /* justifi là bên trái bên phải */
+    align-items: center;
+    /* align-items: là trên dưới; */
+
+}
+.carousel__content{
+    color: white;
+    /*canh giữa nội dung cả chiều dọc và chiều ngang */
+    text-align: center;
+
+}
+
+.carousel__content h1{
+    margin: 30px 0;
+    font-size: 3rem;
+    animation: upDown 1s ease-out 0s infinite;
+}
+/* timing function, chuyển động đều
+    is in, in out
+    delay: chờ bào nhiêu giây để có chuyển động, mặc định là 0s
+    interation-count số lần thực hiện chu kỳ
+    iteration-count: infinite ko ngừng
+
+*/
+
+.carousel__content p{
+    font-weight: lighter;
+    color: rgb(219, 219, 219);  
+    margin-bottom: 30px;
+    animation: upDown 1s ease-out 0s infinite;
+}
+
+.carousel__content button{
+    background-color: #ff0e83;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    /* đối vs btn chỉnh kích thước dùng padding */
+    padding: 11px 25px;
+    /* cursor là đổi con chuột thành dấu bàn tay */
+    cursor: pointer;
+    padding: 16px 40px;
+    transition: all .5s;
+    animation: upDown 1s ease-out 0s infinite;
+
+}
+/* gắn hover cho btn để rê chuột vào thẻ đó nó sẽ đổi màu */
+.carousel__content button:hover{
+    background-color: white;
+    border-color: #ff0e83;
+    color: black;
+
+}
+
+/* grid
+    là kĩ thuật của CSS3
+    phải là phiên bản mới thì mới hiểu được.
+    chỉ quan tâm tới thẻ cha với thẻ con
+    muốn chỉnh thành phần con thì phải khai báo display: grid ở cha gần nhất(tương tự flex)
+    vì cấu trúc nó gần giống table, nene phải khai báo hàng và cột cho nó
+    nếu chỉ chím theo cột thì phải khai báo số cột cho nó
+    và ngược lại
+    khai báo cột bằng thuôc tính grid-template-columns
+    khai báo theo phần trăm của cột.
+    vd: 25% 25% 50%
+    cho cột 1 ,2 ,3
+    nếu những con số width của các cột giống nhau thì có thể dùng cú phát repeat()
+    repeat nhận 2 tham số số đàu tiên là số cột, số thứ 2 là kích thước của mỗi cột
+    vd: repeat(4,25%)
+    ĐƠN VỊ CHỈ DÙNG CHO THẰNG GRID
+    fr: phân số 
+    ví dụ: repeat(4, 1fr)
+    mỗi cột có kích thước 1/4 so với grid
+
+*/
+
+
+/* Intro */
+.intro{
+    display: grid;
+    /* grid-template-columns: 25% 25% 25% 25%; */
+    /* grid-template-columns: repeat(4,25%); */
+    grid-template-columns: repeat(4, 1fr);
+    /* 1fr bằng 1 / số cột */
+    /* khai báo tới đây chỉ mới khai báo cột dòng thôi */
+    /* thao tác tiếp theo ta đi gom cột và dòng, bài này chỉ cần gần gom cột */
+    /* xác định các column cần gom */
+    /* xác định line bắt đầu thành phần cần gom */
+    /* khai báo thuộc tính riêng cho thành phần con cần gom */
+}
+
+.intro_ab1{
+    /* để gom column dùng grid column */
+    /* line bắt đầu / line kết thúc */
+    /* grid-column: 2 / 4; */
+    /* cú pháp khác */
+    /* line bắt đầu / span + số column nó chíếm */
+    grid-column: 2 / span 2;
+}
+
+.intro_whatwebakeforyou{
+    grid-column: 1 / span 2;
+}
+
+.intro__ab4{
+    grid-column: 3 / span 2;
+}
+
+.intro__items img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.intro_tradition{
+    background-color: #4e2a84;
+    color: white;
+    /* position: relative;*/
+    text-align: center;    
+    padding: 50% 30px;
+    line-height: 2rem;
+    letter-spacing: 1.8px;
+
+}
+
+.intro__creativity{
+    background-color: #ff0e83;
+    color: white;
+    /* position: relative;*/
+    text-align: center;    
+    padding: 50% 30px;
+    line-height: 2rem;
+    letter-spacing: 1.8px;
+}
+.intro_whatwebakeforyou{
+    background-color: #ed6498;
+    color: white;
+    text-align: center;
+    line-height: 2rem;
+    letter-spacing: 1.8px;
+}
+.intro_whatwebakeforyou .text{
+    padding: 30% 30px;
+}
+.intro_whatwebakeforyou .text h3{
+    font-weight: bold;
+    font-size: 1.5rem;  
+}
+.intro_whatwebakeforyou .text p{
+    font-weight: lighter;
+    font-size: 0.7rem;
+    color: rgb(218, 211, 211);  
+}
+
+
+.intro__tastycake{
+    background-color: #4e2a84;
+    color: white;
+    /* position: relative;*/
+    text-align: center;    
+    padding: 50% 30px;
+    line-height: 2rem;
+    letter-spacing: 1.8px;
+}
+.intro__quality{
+    background-color: #836eaa;
+    color: white;
+    /* position: relative;*/
+    text-align: center;    
+    padding: 50% 30px;
+    line-height: 2rem;
+    letter-spacing: 1.8px;
+}
+.intro__items h3{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.intro__items p{
+    font-weight: lighter;
+    font-size: 0.7rem;
+    color: rgb(218, 211, 211);
+}
+
+/* NUMBER */
+.number__content{
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+    /* auto là chia 2 bên 15% nội dung 70% ở giữa */
+    justify-content: space-evenly;
+}
+.number{
+    padding: 70px 0;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+
+}
+
+
+
+/* onload là bật lên là chạy liền
+    on scroll trượt xuống vị trí của nó thì nó mới chạy
+*/
+/* JQuery là 1 thư viện
+    phát triển lên thành Angular, React
+    nhược điểm: cực kỳ nặng nên ko ai dùng Jquery để dựng toàn bộ UI
+    giờ chỉ dùng để làm hiệu ứng UI
+    uncompressed đuôi file là chấm js
+    minified: đuôi min.js
+    file min là các dòng code đc format lại thành 1 dòng để website chạy cho nhẹ
+    còn file uncompressed để fix bug, lầm trình
+
+    đối với các file này thêm vào cuối cùng trước thẻ đóng body
+    đó là vị trí nên gắn trong website
+    thực chất có thể thêm ở head
+    javascript: trình duyệt đọc lỗi dòng nào thì sẽ dừng ở dòng đó, ko đọc nữa
+    nếu khai báo ở trên head mà lỗi thì các code ở dưới sẽ ko đc đọc
+    nếu khai báo ở dưới cùng, nếu có lỗi thì cùng lắm hiệu ứng ko chạy được.
+
+*/
+
+.counter{
+    color: #4e2a84;
+}
+
+
+/* SERVICES */
+
+/* justify hết khoảng trống 
+    flex chỉ có 10%
+    nên phải thêm padding trái phải cho các thẻ con
+*/
+.services{
+    text-align: center;
+    padding: 80px 0px;
+    background-image: url(../images/s1.jpg);
+    background-size: cover;
+
+}
+
+.services__content{
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+}
+
+.services__items{
+    padding: 0 20px;
+}
+
+.services h2{
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 50px;
+}
+
+.services button{
+    padding: 11px 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #ff0e83;
+    color: white;
+    cursor: pointer;
+    transition: 0.8s;
+
+}
+
+.services button:hover{
+    border: #ff0e83;
+    color: black;
+    background-color: white;
+}
+
+
+.services__items i{
+    font-size: 3rem;
+    color: #4e2a84;
+
+    width: 80px;
+    height: 80px;
+    border: 1px solid #4e2a84;
+    border-radius: 50%;
+    background-color: white;
+    /* bnar thân nó đã được căng theo chiều ngang rồi
+        dùng line heightL để canh nó giữa theo chiều dọc, chỉ dùng cho ít ký tự
+    */
+    line-height: 80px;
+    /* bản chất là khoảng cách giữa các dòng chữ, tuy nhiên icon chỉ có 1 dogd duy nahast
+    nên nó giúp mình canh giữa icon theo chiều dọc
+    và tùy vào hình dáng của nó mà sử dụng kích thước trùng với kích thước của icon
+    */
+    transition: all 0.8s;
+    /* ko khai báo ở hover để có 2 chiều, nếu khai báo ở hover thì chỉ 1 chiều vào thôi
+    ko có chiều ra */
+}
+
+/* thẻ cha hover và thẻ con thay đổi */
+.services__items:hover i{
+    color: #ff0e83;
+    /* transition-property: color;
+    transition-duration: 0.5s; */
+
+}
+
+
+/* GALLERY */
+.gallery h2{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: lighter;
+}
+
+
+.gallary__content{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* Grid cos cung cấp thuộc tính để cung cấp khoảng cách tiếp giáp giữa các thẻ con */
+    /* chỗ nào khai báo display grid thì khai báo grid-gap */
+
+    /* grid-gap: ; */
+    /* thằng trên ko hỗ trợ của MS */
+    gap: 30px;
+    /* gap hỗ trợ nhiều hơn */
+    /* giữa các con có khoảng cách, nhưng con với viền ko có khoảng cách */
+    padding: 60px 10px;
+    
+}
+
+.gallary__g1{
+    grid-column: 1 / span 2;
+}
+
+.gallary__g6{
+    grid-column: 3 / span 2;
+}
+
+.gallary__content img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* padding: 10px; */
+    /* Grid cos cung cấp thuộc tính để cung cấp khoảng cách tiếp giáp giữa các thẻ con */
+    /* chỗ nào khai báo display grid thì khai báo grid-gap */
+
+}
+
+.gallary__items{
+    position: relative;
+}
+
+.galerry__overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(48, 132, 163, 0.2);
+    color: white;
+    padding: 30px 25px;
+    text-align: right;
+}
+
+.galerry__overlay p{
+    position: absolute;
+    bottom: 30px;
+    right: 25px;
+    transform: translateY(30px);
+    transition: all .5s;
+    opacity: 0;
+}
+/* tạo đường gạch bằng before và after */
+/* bắt buộc phải có thuộc tính content */
+/* .galerry__overlay h3::before{
+    content: 'The';
+}
+.galerry__overlay h3::after{
+    content: ' !';
+} */
+
+/* Vẽ đường gạch */
+.galerry__overlay h3::after{
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    /* bản thân after và before là inline nên muốn nó hiện thì phải đổi sang block */
+    display: block;
+    margin-top: 15px;
+    transform: translateY(25px);
+    transition: all .5s;
+    opacity: 0;
+
+}
+
+.galerry__overlay span{
+    font-weight: lighter;
+}
+
+/* xây dựng trạng thái trước khi rê chuột */
+/* translate: 1 hàm của hàm transform tạo hiện ứng chuyển động khi ng dùng rê chuột vào
+    translate chia thành 2 trục tọa độ x, y
+
+    muốn di chuyển đi xuống thì theo trục y;
+    lúc đầu là nó ở dưới 50px
+    khi user hover vào thì quay trở lại là 0
+    
+*/
+
+.galerry__overlay h3{
+    transform: translateY(50px);
+    transition: all .5s;
+    font-size: 1.8rem;
+}
+
+.gallary__items:hover h3{
+    transform: translateY(0);
+
+}
+
+.gallary__items:hover h3::after{
+    transform: translateY(0);
+    opacity: 100;
+}
+
+.gallary__items:hover p{
+    transform: translateY(0);
+    opacity: 100;
+
+}
+/* TEAM */
+
+.team h2{
+    padding: 50px 0;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.team{
+    background-color: #4e2a84;
+    color: white;
+    width: 100%;
+
+}
+.team__content{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 60%;
+    margin: 0 auto;
+    gap: 30px;
+
+
+}
+
+.team__items img{
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.team__items{
+    position: relative;
+}
+
+.team__text{
+    width: 100%;
+    padding: 40px;
+    background-color: #ff0e83;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all 1s;
+}
+
+
+.team__details{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    color: white;
+    position: absolute;
+    opacity: 0;
+    transition: all 1s;
+    padding: 30% 10%;
+
+}
+.team__details h3{
+    color: #ff0e83;
+    margin: 30px 0;
+}
+.team__details p{
+    margin: 10px 0;
+    line-height: 2rem;
+}
+
+.team__items:hover .team__text{
+    opacity: 0;
+}
+
+.team__items:hover .team__details{
+    opacity: 100;
+}
+
+
+.team__items2 .team__details{
+    transform: translateX(-100%);
+    opacity: 1;
+}
+
+.team__items2{
+    overflow: hidden;
+}
+
+.team__items2:hover .team__details{
+    transform: translateX(0)
+}
+
+.team__items3 .team__details{
+    
+    transform: rotate(45deg);
+}
+
+.team__items3:hover .team__details{
+    transform: rotate(0deg)
+}
+
+.team__items3{
+    overflow: hidden;
+}
+
+.team__items4 .team__details{
+    opacity: 0;
+    transform: scale(0.75);
+    /* lay so nay nhan voi kich thuoc cua the nay */
+}
+
+.team__items4:hover .team__details{
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* CAROUSEL FEEDBACK*/
+
+.feedback{
+    background-image: url(../images/cc1.jpg);
+    background-size: cover;
+    text-align: center;
+    padding: 80px 0;
+}
+.feedback__content{
+    width: 70%;
+    margin: 0 auto;
+    border: 2px solid #ed6498;
+    background-color: rgba(255, 255, 255, 0.458);
+    padding: 30px 40px;
+    line-height: 1.8rem;
+    /* letter-spacing: 2px; */
+    font-size: 0.9rem;
+}
+
+.feedback__content span{
+    font-weight: bold;
+}
+
+
+.feedback h2{
+    margin-bottom: 30px;
+    font-size: 3rem;
+    color: white;
+}
+
+.feedback__content i{
+    color: #007bff;
+    margin: 0 15px;
+    font-size: 1.5rem;
+}
+
+.feedback .owl-theme .owl-dots .owl-dot.active span, .feedback .owl-theme .owl-dots .owl-dot:hover span{
+    background-color: rgb(156, 146, 146);
+}
+
+.feedback .owl-theme .owl-dots .owl-dot span{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+/* CONTACT */
+.contact{
+    margin-bottom: 30px;
+}
+
+.contact h2{
+    text-align: center;
+    padding: 50px 0;
+    font-size: 3rem;
+}
+
+.contact__form{
+    width: 60%;
+    margin:  0 auto;
+}
+.contact__form form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+
+}
+.contact textarea{
+    grid-column: 1 / span 2;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid black;
+    transition: all .5s;
+
+}
+
+.contact__form .button{
+    grid-column: 1 / span 2;
+    background-color: #ff0e83;
+    font-weight: bold;
+    transition: all .5s;
+    border: none;
+}
+.contact__form input{
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: all .5s;
+}
+
+.contact__form .button:hover{
+    color: white;
+    background-color: black;
+}
+.contact__form input:focus{
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.contact__form textarea:focus{
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.contact__form textarea::placeholder{
+    color: grey;
+}
+iframe{
+    width: 100%;
+    padding: 30px 0;
+}
+
+.backToTop{
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    border: 2px solid #a80856;
+    border-radius: 50%;
+    color: #a80856;
+    text-align: center;
+    line-height: 45px;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: all .5s;
+}
+
+.cd-top--is-visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+
+  /* ANIMATION */
+  /* khai báo keyframe đặt cuối cùng
+    đặt tên gì cũng đc, ở đây đặt up down
+  */
+  /* @keyframes upDown{
+      /* 100% */
+      /* 0%{}
+      25%{ */ 
+          /* cho nó đi lên 50px */
+          /* transform: translateY(-50px) scale(1.2); */
+          
+      /* }
+      50%{
+        transform: translateY(0) scale(1);
+      }
+      75%{
+          transform: translateY(50px) scale(1.2);
+      }
+      100%{
+          transform: translateY(0) scale(1);
+      }
+  } */
+
+  /* CONTACT */
+  .contact__info{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0 auto;
+      width: 90%;
+      text-align: center;
+      padding: 30px 0;
+        
+  }
+  .contact__info__item i{
+      padding: 20px 0;
+      font-size: 1.5rem;
+      color: #4e2a84;
+  }
+  .contact__info__item p{
+      font-size: 0.9rem;
+  }
+
+  /* FOOTER */
+
+  footer{
+      background-color: black;
+  }
+  .footer__content{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 60%;
+      margin: 0 auto;
+      padding: 80px 0;
+      gap: 30px;
+  }
+  .footer_items{
+      color: white;
+  }
+
+  .footer_items h2{
+      margin-bottom: 30px;
+      color: #ff0e83;
+  }
+  .footer_items p{
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+      line-height: 1.6rem;
+      margin-bottom: 15px;
+  }
+  .footer_items i{
+      width: 40px;
+      height: 40px;
+      border: 1px solid white;
+      line-height: 40px;
+      text-align: center;
+      margin-right: 15px;
+      color: white;
+      transition: all .5s;
+  }
+  .footer_items i:hover{
+      color: #ff0e83;
+      border: 1px solid #ff0e83;
+
+  }
+
+  .footer_items2 ul{
+      list-style: none;
+
+  }
+  .footer_items2 ul li{
+      border-bottom: 1px dotted white;
+      margin-bottom: 10px;
+      padding: 0px 0px 7px;
+      font-size: 13px;
+  }
+  .footer_items2 span{
+      float: right;
+  }
+  .footer_items .mail__input{
+    padding: 13px 10px;
+    border: 1px solid #000;
+    width: 70%;
+    background: rgb(255, 255, 255);
+    outline: none;
+    letter-spacing: 1px;
+    color: #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .footer_items button{
+      display: block;
+      padding: 10px 25px;
+      border-radius: 5px;
+      border: none;
+      color: black;
+      background-color: #ff0e83;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      margin-top: 10px;
+      transition: all .5s;
+  }
+  .footer_items button:hover{
+      background-color: white;
+  }
